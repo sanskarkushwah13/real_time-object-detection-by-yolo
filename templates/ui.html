@@ -58,6 +58,63 @@
         margin:0px;
         margin-top:-10px;
         }
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.video-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.history-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.history-container h2 {
+    margin-top: 0;
+}
+
+#historyList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#historyList li {
+    background: #f9f9f9;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
     </style>
 </head>
 <body>
@@ -70,8 +127,43 @@
 
   <section class="col-sm " >
           <img src="{{ url_for('webapp') }}"   alt="Upload video">
-
+    
   </section>
+  <div class="container">
+    <div class="video-container">
+        <video id="videoPlayer" controls>
+            <source src="videos/sample.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="history-container">
+        <h2>Video History</h2>
+        <ul id="historyList"></ul>
+    </div>
+</div>
+<script >document.addEventListener('DOMContentLoaded', (event) => {
+  const videoPlayer = document.getElementById('videoPlayer');
+  const historyList = document.getElementById('historyList');
 
+  videoPlayer.addEventListener('play', () => {
+      addHistoryEvent('play');
+  });
+
+  videoPlayer.addEventListener('pause', () => {
+      addHistoryEvent('pause');
+  });
+
+  videoPlayer.addEventListener('ended', () => {
+      addHistoryEvent('ended');
+  });
+
+  function addHistoryEvent(action) {
+      const listItem = document.createElement('li');
+      const currentTime = new Date().toLocaleTimeString();
+      listItem.textContent = `Video ${action} at ${currentTime}`;
+      historyList.appendChild(listItem);
+  }
+});
+</script>
 </body>
 </html>
