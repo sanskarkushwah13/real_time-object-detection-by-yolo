@@ -6,48 +6,87 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Video</title>
+    <script
+      src="https://kit.fontawesome.com/e215930440.js"
+      crossorigin="anonymous"
+    ></script>
     <style>
-        body{
-            color:white;
-            margin:0px;
-            padding:0px;
-        }
-        header.feature-box.top{
-        background-color:black;
-        height:100px;
-        margin:0px;
-        padding:20px;
-        text-align:center;
-        }
-        header.feature-box.second{
-        background-color:blue;
-        height:50px;
-        text-align:center;
-        margin-top:-25px;
-        }
-        .features{
-          background-color:black;
+      * {
+        font-family: Helvetica, sans-serif;
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-image: linear-gradient(black, rgb(71, 70, 70));
+        color: #e0e0e0;
+      }
+      .logo img {
+        border-radius: 4px;
+        padding: 5px;
+        width: 149px;
+        
+        margin-top: -120px;
+        margin-left: -98px;
+      }
+      img{
           width: 900px;
-          height: 700px;
-          border-radius: 35px;
+          height: 270px;
+          /* border-radius: 35px; */
           object-fit: contain;
-          margin:20px;
+          margin:-100px;
         }
-        section.col-sm{
+      .container {
+        padding: 10px 10%;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        /* margin-top: -2%; */
+        /* background-color: #0a0a0a; */
+      }
+      nav ul li {
+        display: inline-block;
+        list-style: none;
+        margin: 10px 20px;
+        /* border-radius: 10px; */
+        /* color:#E0E0E0; */
+        padding: 10px;
+        margin: 10px;
+        margin-bottom: 21%;
+      }
+      nav ul li a {
+        color: #e0e0e0;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+      }
+      nav ul li a::after {
+        content: "";
+        width: 0;
+        height: 3px;
+        background: #e0e0e0;
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        transition: 0.5s;
+      }
+      nav ul li a:hover::after {
+        width: 100%;
+      }
+        div.col-sm{
           background-color:black;
           width: 1000px;
           height: 650px;
           border-radius: 35px;
           object-fit: contain;
           margin:40px;
-        }
-
-        img{
-          width: 900px;
-          height: 600px;
-          border-radius: 35px;
-          object-fit: contain;
-          margin:40px;
+          margin-left: 244px;
         }
 
         .new{
@@ -59,21 +98,137 @@
         margin-top:-10px;
         }
 
+        /* ----------------contact-------------- */
+      .contact-left {
+        flex-basis: 35%;
+      }
+      .contact-right {
+        flex-basis: 60%;
+      }
+      .contact-left p {
+        margin-top: 30px;
+      }
+      .contact-left p i {
+        color: #e0e0e0;
+        margin-right: 15px;
+        font-size: 25px;
+      }
+      .social-icons {
+        margin-top: 30px;
+      }
+      .social-icons a {
+        text-decoration: none;
+        font-size: 30px;
+        margin-right: 15px;
+        color: #ababab;
+        display: inline-block;
+        transition: transform 0.5s;
+      }
+      .social-icons a:hover {
+        color: #e0e0e0;
+        transform: translateY(-5px);
+      }
+      .btn.btn2 {
+        display: inline-block;
+        background: #e0e0e0;
+        cursor: pointer;
+      }
+      .contact-right form {
+        width: 100%;
+      }
+      form input,
+      form textarea {
+        width: 100%;
+        border: 0;
+        outline: none;
+        background: #262626;
+        padding: 15px;
+        margin: 15px 0;
+        color: #fff;
+        font-size: 18px;
+        border-radius: 6px;
+      }
+      .form .btn2 {
+        padding: 14px 60px;
+        font-size: 18px;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+      .copyright {
+        width: 100%;
+        text-align: center;
+        padding: 25px 0;
+        background: #262626;
+        font-weight: 300;
+        margin-top: 20px;
+      }
+      .copyright i {
+        color: #e0e0e0;
+      }
+      .btn {
+        display: block;
+        text-align: center;
+        margin: 50px auto;
+        width: fit-content;
+        border: 1px solid #e0e0e0;
+        padding: 14px 50px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: black;
+        /* transition: background 0.5; */
+      }
+      .sub-title {
+        font-size: 60px;
+        font-weight: 600;
+        color: #d2d8df;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      #topBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 99;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background-color: e0e0e0;
+        color: black;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 4px;
+      }
+
+      #topBtn:hover {
+        background-color: e0e0e0;
+      }
+
     </style>
 </head>
 <body>
-<header class="feature-box top">
-    <h1><strong>Object Detection using YOLOv8</strong></h1>
-</header>
-<header class="feature-box second">
-     <h1><strong>Output Video</strong></h1>
-</header>
+  <div id="header">
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <img src="../static/images/logo.jpg" alt="" />
+        </div>
+        <ul id="sidemenu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="ui.html">LiveWebcam</a></li>
+          <li><a href="videoprojectnew.html">Video</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 
-  <section class="col-sm " >
-          <img src="{{ url_for('video') }}"   alt="Upload video">
-
-  </section>
-<section>
+   
+  <section>
     <div class="new" >
       <form method = 'POST' enctype="multipart/form-data" style="align-content: center; text-align: center;display: flex;">
         {{form.hidden_tag()}}
@@ -89,6 +244,83 @@
 
   </div>
     </section>
+  
+  
+  
+  <div class="col-sm " >
+          <img src="{{ url_for('video') }}"   alt="Upload video">
+
+  </div>
+
+
+    <!-- -----------contact----------------- -->
+    <div id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="contact-left">
+            <h1 class="sub-title">Contact Us</h1>
+            <p>
+              <i class="fa-solid fa-paper-plane"></i>riyamohile812@gmail.com
+            </p>
+            <p><i class="fa-sharp fa-solid fa-square-phone"></i>7898356009</p>
+            <div class="social-icons">
+              <a href="www.linkedin.com/in/riya-mohile-743906235"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
+              <a href="https://github.com/RiyaMohile"
+                ><i class="fa-brands fa-square-github"></i
+              ></a>
+              <a href=""><i class="fa-brands fa-square-x-twitter"></i></a>
+            </div>
+          </div>
+          <div class="contact-right">
+            <form name="submit-to-google-sheet">
+              <input type="text" name="Name" placeholder="Your Name" required />
+              <input
+                type="text"
+                name="Email"
+                placeholder="Your Email"
+                required
+              />
+
+              <button type="submit" class="btn btn2">Submit</button>
+            </form>
+            <span id="msg"></span>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>
+          Real time Object Detection © 2024
+        </p>
+      </div>
+    </div>
+
+    <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
+
+    <script>
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 20 ||
+          document.documentElement.scrollTop > 20
+        ) {
+          document.getElementById("topBtn").style.display = "block";
+        } else {
+          document.getElementById("topBtn").style.display = "none";
+        }
+      }
+
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      }
+    </script>
 
 </body>
 </html>
