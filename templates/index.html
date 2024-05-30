@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ObjectDetection-YOLOv8</title>
+    <script
+      src="https://kit.fontawesome.com/e215930440.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      * {
+        font-family: Helvetica, sans-serif;
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-image: linear-gradient(black, rgb(71, 70, 70));
+        color: #e0e0e0;
+      }
+      .logo img {
+        padding: 5px;
+        width: 150px;
+        /* margin-bottom: 43%; */
+        margin-bottom: -80px;
+        margin-left: -127px;
+        height: 270px;
+        object-fit: contain;
+        margin-top: -165px;
+      }
+      .container {
+        padding: 10px 10%;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        /* margin-top: -2%; */
+        /* background-color: #0a0a0a; */
+      }
+      nav ul li {
+        display: inline-block;
+        list-style: none;
+        margin: 10px 20px;
+        /* border-radius: 10px; */
+        /* color:#E0E0E0; */
+        padding: 10px;
+        margin: 10px;
+        margin-bottom: 21%;
+      }
+      nav ul li a {
+        color: #e0e0e0;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+      }
+      nav ul li a::after {
+        content: "";
+        width: 0;
+        height: 3px;
+        background: #e0e0e0;
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        transition: 0.5s;
+      }
+      nav ul li a:hover::after {
+        width: 100%;
+      }
+      .header-text {
+        margin-top: 12%;
+        font-size: 20px;
+      }
+      .left-img {
+        flex-basis: 35%;
+      }
+      .left-img img {
+        width: 152%;
+    margin-top: 0%;
+    margin-left: -52%;
+      }
+      .features {
+        flex-basis: 35%;
+      }
+      .features img {
+        width: 32%;
+        margin-left: 44%;
+      }
+      .subpart2 img {
+        width: 25%;
+        margin-left: 44%;
+      }
+      
+      /* ----------------contact-------------- */
+      .contact-left {
+        flex-basis: 35%;
+      }
+      .contact-right {
+        flex-basis: 60%;
+      }
+      .contact-left p {
+        margin-top: 30px;
+      }
+      .contact-left p i {
+        color: #e0e0e0;
+        margin-right: 15px;
+        font-size: 25px;
+      }
+      .social-icons {
+        margin-top: 30px;
+      }
+      .social-icons a {
+        text-decoration: none;
+        font-size: 30px;
+        margin-right: 15px;
+        color: #ababab;
+        display: inline-block;
+        transition: transform 0.5s;
+      }
+      .social-icons a:hover {
+        color: #e0e0e0;
+        transform: translateY(-5px);
+      }
+      .btn.btn2 {
+        display: inline-block;
+        background: #e0e0e0;
+        cursor: pointer;
+      }
+      .contact-right form {
+        width: 100%;
+      }
+      form input,
+      form textarea {
+        width: 100%;
+        border: 0;
+        outline: none;
+        background: #262626;
+        padding: 15px;
+        margin: 15px 0;
+        color: #fff;
+        font-size: 18px;
+        border-radius: 6px;
+      }
+      .form .btn2 {
+        padding: 14px 60px;
+        font-size: 18px;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+      .copyright {
+        width: 100%;
+        text-align: center;
+        padding: 25px 0;
+        background: #262626;
+        font-weight: 300;
+        margin-top: 20px;
+      }
+      .copyright i {
+        color: #e0e0e0;
+      }
+      .btn {
+        display: block;
+        text-align: center;
+        margin: 50px auto;
+        width: fit-content;
+        border: 1px solid #e0e0e0;
+        padding: 14px 50px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: black;
+        /* transition: background 0.5; */
+      }
+      .sub-title {
+        font-size: 60px;
+        font-weight: 600;
+        color: #d2d8df;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      /* ---------F and Q---------------- */
+
+      .faq-container {
+        width: 80%;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #262626;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(245, 244, 244, 0.1);
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+
+      .faq {
+        text-align: left;
+      }
+
+      .faq-item {
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        margin: 10px 0;
+        overflow: hidden;
+      }
+
+      .faq-question {
+        width: 100%;
+        padding: 15px;
+        background-color: #262626;
+        border: none;
+        outline: none;
+        text-align: left;
+        font-size: 1em;
+        cursor: pointer;
+      }
+
+      .faq-answer {
+        padding: 15px;
+        background-color: #262626;
+        display: none;
+      }
+
+      .faq-item.open .faq-answer {
+        display: block;
+      }
+
+      .faq-item.open .faq-question {
+        background-color: #f1f1f1;
+      }
+
+      .faq-question::after {
+        content: "";
+        display: inline-block;
+        margin-left: 10px;
+        width: 10px;
+        height: 10px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(45deg);
+      }
+
+      .faq-item.open .faq-question::after {
+        transform: rotate(-135deg);
+      }
+
+
+      /* ------------service--------- */
+      
+      #service {
+        padding: 50px 0;
+        
+      }
+      .container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+}
+
+.service {
+    background-color: #262626;
+    border-radius: 10px;
+    /* box-shadow: 0 0 20px rgba(245, 244, 244, 0.1); */
+    width: 45%;
+    margin-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+    border-style: solid;
+    border-color: #474748;
+    
+}
+
+.service img {
+  max-width: 396px;
+    /* margin-bottom: 6px; */
+}
+
+.service h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #d2d8df;
+}
+
+.service p {
+    font-size: 1em;
+    color: #d2d8df;
+}
+
+.service source{
+  max-width: 350px;
+    margin-bottom: 15px;
+}
+
+      #topBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 99;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background-color: e0e0e0;
+        color: black;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 4px;
+      }
+
+      #topBtn:hover {
+        background-color: e0e0e0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <div class="container">
+        <nav>
+          <div class="logo">
+            <img src="../static/images/logo.jpg" alt="" />
+          </div>
+          <ul id="sidemenu">
+            <li><a href="#header">Home</a></li>
+            <li><a href="#service">Services</a></li>
+            <li><a href="videoprojectnew.html">Video</a></li>
+            <li><a href="ui.html">LiveWebcam</a></li>
+            <li><a href="#FAQ's">FAQ's</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="row">
+          <div class="header-text">
+            <h2>Real time</h2>
+            <br />
+            <h1>Object Detection</h1>
+          </div>
+          <div class="left-img">
+            <img src="../static/images/header.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+   <!-- --------------services----- -->
+    <div id="service">
+      <div class="container">
+        <h1 class="sub-title">Services</h1>
+        <section class="services">
+          <div class="service">
+            <img src="../static/images/1.png" alt="YOLOv8 Results 1">
+            <h2>YOLOv8 Results 1</h2>
+            <!-- <p>Whether here in Utah or on-site at your organization, WebAIM can provide web and document training to fit your needs.</p> -->
+        </div>
+        <div class="service">
+          <img src="../static/images/2.png" alt="YOLOv8 Results 2">
+          <h2>YOLOv8 Results 2</h2>
+          <!-- <p>The Strategic Web Accessibility Workshop will help participants make strategic plans for the accessibility of their organizations.</p> -->
+        </div>
+        <div class="service">
+          <img src="../static/images/3.png" alt="YOLOv8 Results 3">
+          <h2>YOLOv8 Results 3</h2>
+          <!-- <p>Need assistance implementing accessibility? WebAIM's expert staff can provide the assistance you need.</p> -->
+        </div>
+      <div class="service">
+        <video controls autoplay loop muted width="400" poster="path/to/poster.jpg">
+          <source src="../static/images/InputVideo1.mp4" type="video/mp4">
+      </video>
+      <h2>YOLOv8 Results 4</h2>
+      </div>
+    </section>
+  </div>
+</div>
+  
+      <!-- ---------F and Q--------------- -->
+      <div id="FAQ's">
+      <div class="faq-container">
+        <h1>FAQ's</h1>
+        <div class="faq">
+          <div class="faq-item open">
+            <button class="faq-question">+ FPS of Video?</button>
+            <div class="faq-answer">
+              <p>
+                FPS represents the Frame Rate, in case of GPU the FPS will be
+                high while in case of CPU the FPS will be low
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">+ Shape of Current Frame?</button>
+            <div class="faq-answer">
+              <p>
+                The shape of current frame i.e. Resolution will be calculated
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">+ Detections in Current Frame?</button>
+            <div class="faq-answer">
+              <p>Total detections in each of the frame will be calculated</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const faqQuestions = document.querySelectorAll(".faq-question");
+        faqQuestions.forEach((question) => {
+          question.addEventListener("click", () => {
+            const faqItem = question.parentNode;
+            faqItem.classList.toggle("open");
+          });
+        });
+      });
+    </script>
+
+    <!-- -----------contact----------------- -->
+    <div id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="contact-left">
+            <h1 class="sub-title">Contact Us</h1>
+            <p>
+              <i class="fa-solid fa-paper-plane"></i>riyamohile812@gmail.com
+            </p>
+            <p><i class="fa-sharp fa-solid fa-square-phone"></i>7898356009</p>
+            <div class="social-icons">
+              <a href="www.linkedin.com/in/riya-mohile-743906235"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
+              <a href="https://github.com/RiyaMohile"
+                ><i class="fa-brands fa-square-github"></i
+              ></a>
+              <a href=""><i class="fa-brands fa-square-x-twitter"></i></a>
+            </div>
+          </div>
+          <div class="contact-right">
+            <form name="submit-to-google-sheet">
+              <input type="text" name="Name" placeholder="Your Name" required />
+              <input
+                type="text"
+                name="Email"
+                placeholder="Your Email"
+                required
+              />
+
+              <button type="submit" class="btn btn2">Submit</button>
+            </form>
+            <span id="msg"></span>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>
+          Real time Object Detection © 2024
+        </p>
+      </div>
+    </div>
+
+    <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
+
+    <script>
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 20 ||
+          document.documentElement.scrollTop > 20
+        ) {
+          document.getElementById("topBtn").style.display = "block";
+        } else {
+          document.getElementById("topBtn").style.display = "none";
+        }
+      }
+
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      }
+    </script>
+  </body>
+</html>
