@@ -55,7 +55,7 @@ def generate_frames_web(path_x):
 @app.route('/home', methods=['GET','POST'])
 def home():
     session.clear()
-    return render_template('indexproject.html')
+    return render_template('index.html')
 # Rendering the Webcam Rage
 #Now lets make a Webcam page for the application
 #Use 'app.route()' method, to render the Webcam page at "/webcam"
@@ -77,6 +77,9 @@ def front():
         session['video_path'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), app.config['UPLOAD_FOLDER'],
                                              secure_filename(file.filename))
     return render_template('videoprojectnew.html', form=form)
+
+
+
 @app.route('/video')
 def video():
     #return Response(generate_frames(path_x='static/files/bikes.mp4'), mimetype='multipart/x-mixed-replace; boundary=frame')
