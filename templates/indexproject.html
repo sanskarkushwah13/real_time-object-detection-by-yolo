@@ -1,186 +1,523 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>ObjectDetection-YOLOv8</title>
+    <script
+      src="https://kit.fontawesome.com/e215930440.js"
+      crossorigin="anonymous"
+    ></script>
     <style>
-        body{
-        font-family:Helvetica, sans-serif;
-        margin:0px;
-        padding:0px;
-        }
-        header.feature-box.right{
-        background-color:black;
-        color:white;
-        height:120px;
-        padding:5px;
-        text-align:right;
-        }
-        header.feature-box.below{
-        height:800px;
-        background-color:blue;
-        margin-top:-30px;
-        background-image:url("../static/images/1.png");
-        background-size:100%;
-        background-position:center;
-        }
-        ul{
-        list-style:none;
-        padding:0px;}
-        li{
-        display:inline-block;
-        background-color:gray;
-        border-radius:10px;
-        padding:10px;
-        margin:10px;
-        }
-        li:hover{
-        background-color:red;
-        margin:10px;
-        }
-        header a{
-        color:white;
-        text-decoration:none;
-        width:100%;
-        }
-        .details{
-        height:80px;
-        margin:40px;
-        padding:0px;
-        font-size:40px;
-        background-color:gray;
-        text-align:center;
-        color:black;
-        }
+      * {
+        font-family: Helvetica, sans-serif;
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-image: linear-gradient(black, rgb(71, 70, 70));
+        color: #e0e0e0;
+      }
+      .logo img {
+        border-radius: 4px;
+        padding: 5px;
+        width: 150px;
+        margin-bottom: 43%;
+      }
+      .container {
+        padding: 10px 10%;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        /* margin-top: -2%; */
+        /* background-color: #0a0a0a; */
+      }
+      nav ul li {
+        display: inline-block;
+        list-style: none;
+        margin: 10px 20px;
+        /* border-radius: 10px; */
+        /* color:#E0E0E0; */
+        padding: 10px;
+        margin: 10px;
+        margin-bottom: 21%;
+      }
+      nav ul li a {
+        color: #e0e0e0;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+      }
+      nav ul li a::after {
+        content: "";
+        width: 0;
+        height: 3px;
+        background: #e0e0e0;
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        transition: 0.5s;
+      }
+      nav ul li a:hover::after {
+        width: 100%;
+      }
+      .header-text {
+        margin-top: 12%;
+        font-size: 20px;
+      }
+      .left-img {
+        flex-basis: 35%;
+      }
+      .left-img img {
+        width: 152%;
+    margin-top: 0%;
+    margin-left: -52%;
+      }
+      .features {
+        flex-basis: 35%;
+      }
+      .features img {
+        width: 32%;
+        margin-left: 44%;
+      }
+      .subpart2 img {
+        width: 25%;
+        margin-left: 44%;
+      }
+      /* --------------services----- */
+      #service {
+        padding: 50px 0;
+      }
+      /* ----------------contact-------------- */
+      .contact-left {
+        flex-basis: 35%;
+      }
+      .contact-right {
+        flex-basis: 60%;
+      }
+      .contact-left p {
+        margin-top: 30px;
+      }
+      .contact-left p i {
+        color: #e0e0e0;
+        margin-right: 15px;
+        font-size: 25px;
+      }
+      .social-icons {
+        margin-top: 30px;
+      }
+      .social-icons a {
+        text-decoration: none;
+        font-size: 30px;
+        margin-right: 15px;
+        color: #ababab;
+        display: inline-block;
+        transition: transform 0.5s;
+      }
+      .social-icons a:hover {
+        color: #e0e0e0;
+        transform: translateY(-5px);
+      }
+      .btn.btn2 {
+        display: inline-block;
+        background: #e0e0e0;
+        cursor: pointer;
+      }
+      .contact-right form {
+        width: 100%;
+      }
+      form input,
+      form textarea {
+        width: 100%;
+        border: 0;
+        outline: none;
+        background: #262626;
+        padding: 15px;
+        margin: 15px 0;
+        color: #fff;
+        font-size: 18px;
+        border-radius: 6px;
+      }
+      .form .btn2 {
+        padding: 14px 60px;
+        font-size: 18px;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+      .copyright {
+        width: 100%;
+        text-align: center;
+        padding: 25px 0;
+        background: #262626;
+        font-weight: 300;
+        margin-top: 20px;
+      }
+      .copyright i {
+        color: #e0e0e0;
+      }
+      .btn {
+        display: block;
+        text-align: center;
+        margin: 50px auto;
+        width: fit-content;
+        border: 1px solid #e0e0e0;
+        padding: 14px 50px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: black;
+        /* transition: background 0.5; */
+      }
+      .sub-title {
+        font-size: 60px;
+        font-weight: 600;
+        color: #d2d8df;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      /* ---------F and Q---------------- */
+
+      .faq-container {
+        width: 80%;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #262626;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(245, 244, 244, 0.1);
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+
+      .faq {
+        text-align: left;
+      }
+
+      .faq-item {
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        margin: 10px 0;
+        overflow: hidden;
+      }
+
+      .faq-question {
+        width: 100%;
+        padding: 15px;
+        background-color: #262626;
+        border: none;
+        outline: none;
+        text-align: left;
+        font-size: 1em;
+        cursor: pointer;
+      }
+
+      .faq-answer {
+        padding: 15px;
+        background-color: #262626;
+        display: none;
+      }
+
+      .faq-item.open .faq-answer {
+        display: block;
+      }
+
+      .faq-item.open .faq-question {
+        background-color: #f1f1f1;
+      }
+
+      .faq-question::after {
+        content: "";
+        display: inline-block;
+        margin-left: 10px;
+        width: 10px;
+        height: 10px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(45deg);
+      }
+
+      .faq-item.open .faq-question::after {
+        transform: rotate(-135deg);
+      }
 
 
-        .features{
-        background:white;
-        color:gray;
-        display:flex;
-        flex-direction:row;
-        padding:20px;
+      /* ------------service--------- */
+      .container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+}
 
-        }
-        .features figure
-        {/*background:pink;*/
-        width:400px;
-        margin:auto;
-        text-align:center;
-        text-transform:uppercase;
-        }
-        .features figure img{
-        border-radius:10%;
-        width:400px;
-        }
-        div.main{
-        display:flex;
-        margin:40px;
-        letter-spacing:1px;
-        h1, h2, h3, h4, h5, h6 {
-          font-family: "Playfair Display";
-    letter-spacing: 5px;
-        }
-        }
-        .subpart2{
-        text-align:center;
-        text-transform:uppercase;
-        }
-        .subpart2 figure img{
-        border-radius:4%;
-        width:800px;
-        }
-        .contactpage{
-        margin:20px;
-        }
-        #textbox {
-       font-size: 18pt;
-        height: 42px;
-        width : 1000px;
-        }
-        #textboxes {
-       font-size: 18pt;
-        height: 42px;
-        width : 1000px;
-        }
-        footer{
-        background-color:black;
-        text-align:center;
-        margin:0px;
-        padding:0px;
-        color:white;
-        font-size:20px;
-        }
+.service {
+    background-color: #262626;
+    border-radius: 10px;
+    /* box-shadow: 0 0 20px rgba(245, 244, 244, 0.1); */
+    width: 45%;
+    margin-bottom: 20px;
+    padding: 20px;
+    text-align: center;
+    border-style: solid;
+    border-color: #d2d8df;
+    
+}
 
+.service img {
+  max-width: 396px;
+    margin-bottom: 6px;
+}
+
+.service h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #d2d8df;
+}
+
+.service p {
+    font-size: 1em;
+    color: #d2d8df;
+}
+
+.service source{
+  max-width: 350px;
+    margin-bottom: 15px;
+}
+
+      #topBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 99;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background-color: e0e0e0;
+        color: black;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 4px;
+      }
+
+      #topBtn:hover {
+        background-color: e0e0e0;
+      }
     </style>
-</head>
-<body>
-    <header class="feature-box right">
+  </head>
+  <body>
+    <div id="header">
+      <div class="container">
         <nav>
-            <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/FrontPage">Video</a></li>
-            <li><a href="/webcam">LiveWebcam</a></li>
-            </ul>
+          <div class="logo">
+            <img src="../static/images/logo.jpg" alt="" />
+          </div>
+          <ul id="sidemenu">
+            <li><a href="#header">Home</a></li>
+            <li><a href="#service">Services</a></li>
+            <li><a href="videoprojectnew.html">Video</a></li>
+            <li><a href="ui.html">LiveWebcam</a></li>
+            <li><a href="#FAQ's">FAQ's</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
         </nav>
-    </header>
-
-    <header class="feature-box below">
-    </header>
-
-
-    <section class="details">
-        <h1>Sample Results</h1>
-
-    </section>
-    <section class="features">
-        <figure>
-            <img src="../static/images/1.png" alt="YOLOv8 Results 1">
-            <figcaption>YOLOv8 Results 1</figcaption>
-        </figure>
-        <figure>
-            <img src="../static/images/2.png" alt="YOLOv8 Results 2">
-            <figcaption>YOLOv8 Results 2</figcaption>
-        </figure>
-        <figure>
-            <img src="../static/images/3.png" alt="YOLOv8 Results 3">
-            <figcaption>YOLOv8 Results 3</figcaption>
-    </figure>
-    </section>
-    <div class="main">
-        <div class="subpart1">
-            <h1>Object Detection using YOLOv8</h1><br>
-            <h4> FPS of Video</h4>
-            <p>FPS represents the Frame Rate, in case of GPU the FPS will be high while in case of CPU the FPS will be low</p><br>
-            <h4>Shape of Current Frame</h4>
-            <p>The shape of current frame i.e. Resolution will be calculated</p><br>
-            <h4>Detections in Current Frame</h4>
-            <p>Total detections in each of the frame will be calculated</p><br>
-
+        <div class="row">
+          <div class="header-text">
+            <h2>Real time</h2>
+            <br />
+            <h1>Object Detection</h1>
+          </div>
+          <div class="left-img">
+            <img src="../static/images/header.png" />
+          </div>
         </div>
-
-      <div class="subpart2"><figure>
-      <img src="../static/images/1.png"  alt="Image Missing">
-          <figcaption>Sample Results</figcaption>
-        </figure>
       </div>
+    </div>
+
+    <!-- <div id="service">
+      <div class="container">
+        <h1 class="sub-title">Services</h1>
+        <div class="features">
+          <div>
+            <img src="../static/images/1.png" alt="YOLOv8 Results 1" />
+            <h2>YOLOv8 Results 1</h2>
+          </div>
+          <div>
+            <img src="../static/images/2.png" alt="YOLOv8 Results 2" />
+            <h2>YOLOv8 Results 2</h2>
+          </div>
+          <div>
+            <img src="../static/images/3.png" alt="YOLOv8 Results 3" />
+            <h2>YOLOv8 Results 3</h2>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- --------------service---------- -->
+    <div id="service">
+      <div class="container">
+        <h1 class="sub-title">Services</h1>
+        <section class="services">
+          <div class="service">
+            <img src="../static/images/1.png" alt="YOLOv8 Results 1">
+            <h2>YOLOv8 Results 1</h2>
+            <!-- <p>Whether here in Utah or on-site at your organization, WebAIM can provide web and document training to fit your needs.</p> -->
+        </div>
+        <div class="service">
+          <img src="../static/images/2.png" alt="YOLOv8 Results 2">
+          <h2>YOLOv8 Results 2</h2>
+          <!-- <p>The Strategic Web Accessibility Workshop will help participants make strategic plans for the accessibility of their organizations.</p> -->
+        </div>
+        <div class="service">
+          <img src="../static/images/3.png" alt="YOLOv8 Results 3">
+          <h2>YOLOv8 Results 3</h2>
+          <!-- <p>Need assistance implementing accessibility? WebAIM's expert staff can provide the assistance you need.</p> -->
+        </div>
+      <div class="service">
+        <video controls autoplay loop muted width="400" poster="path/to/poster.jpg">
+          <source src="../static/images/InputVideo1.mp4" type="video/mp4">
+      </video>
+      <h2>YOLOv8 Results 4</h2>
+      </div>
+    </section>
   </div>
-
-<div class="contactpage">
-    <h1>Contact</h1><br>
-    <p>In case of any query do let me know</p>
-        <form action="/action_page.php" target="_blank" >
-            <p><input type="text" placeholder="Name"  required name="Name"  id="textbox"></p>
-            <p><input type="text" placeholder="Email ID" required name="Email ID" id="textboxes"></p>
-            <p><button type="submit">SEND MESSAGE</button></p>
-        </form>
 </div>
+  
+      <!-- ---------F and Q--------------- -->
+      <div id="FAQ's">
+      <div class="faq-container">
+        <h1>FAQ's</h1>
+        <div class="faq">
+          <div class="faq-item open">
+            <button class="faq-question">+ FPS of Video?</button>
+            <div class="faq-answer">
+              <p>
+                FPS represents the Frame Rate, in case of GPU the FPS will be
+                high while in case of CPU the FPS will be low
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">+ Shape of Current Frame?</button>
+            <div class="faq-answer">
+              <p>
+                The shape of current frame i.e. Resolution will be calculated
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">+ Detections in Current Frame?</button>
+            <div class="faq-answer">
+              <p>Total detections in each of the frame will be calculated</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<footer>
-    <p>YOLOv8 Lecture Series <a href="https://www.youtube.com/channel/UC--6PuiEdiQY8nasgNluSOA" title="YouTube Channel"> YouTube Channel</a></p>
-</footer>
-</body>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const faqQuestions = document.querySelectorAll(".faq-question");
+        faqQuestions.forEach((question) => {
+          question.addEventListener("click", () => {
+            const faqItem = question.parentNode;
+            faqItem.classList.toggle("open");
+          });
+        });
+      });
+    </script>
+
+    <!-- -----------contact----------------- -->
+    <div id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="contact-left">
+            <h1 class="sub-title">Contact Us</h1>
+            <p>
+              <i class="fa-solid fa-paper-plane"></i>riyamohile812@gmail.com
+            </p>
+            <p><i class="fa-sharp fa-solid fa-square-phone"></i>7898356009</p>
+            <div class="social-icons">
+              <a href="www.linkedin.com/in/riya-mohile-743906235"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
+              <a href="https://github.com/RiyaMohile"
+                ><i class="fa-brands fa-square-github"></i
+              ></a>
+              <a href=""><i class="fa-brands fa-square-x-twitter"></i></a>
+            </div>
+          </div>
+          <div class="contact-right">
+            <form name="submit-to-google-sheet">
+              <input type="text" name="Name" placeholder="Your Name" required />
+              <input
+                type="text"
+                name="Email"
+                placeholder="Your Email"
+                required
+              />
+
+              <button type="submit" class="btn btn2">Submit</button>
+            </form>
+            <span id="msg"></span>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>
+          Real time Object Detection © 2024
+        </p>
+      </div>
+    </div>
+
+    <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
+
+    <script>
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 20 ||
+          document.documentElement.scrollTop > 20
+        ) {
+          document.getElementById("topBtn").style.display = "block";
+        } else {
+          document.getElementById("topBtn").style.display = "none";
+        }
+      }
+
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      }
+    </script>
+  </body>
 </html>
